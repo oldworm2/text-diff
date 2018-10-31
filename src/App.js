@@ -12,10 +12,8 @@ import Compare from '@material-ui/icons/Compare';
 import TextField from '@material-ui/core/TextField';
 
 import '../node_modules/diff2html/dist/diff2html.css';
-
-
-let jsdiff = require('diff');
-let diff2html = require("diff2html").Diff2Html;
+import {Diff2Html} from 'diff2html'
+import * as jsdiff from 'diff';
 
 const theme = createMuiTheme({
   palette: {
@@ -27,26 +25,26 @@ const theme = createMuiTheme({
 class App extends Component {
 
   state = {
-    inputA: '',
-    inputB: '',
+    textA: '',
+    textB: '',
     outputHtml: ''
   }
 
-  inputAChanged(event){
+  textAChanged(event){
     this.setState({
-      inputA: event.target.value
+      textA: event.target.value
     });
   }
 
-  inputBChanged(event){
+  textBChanged(event){
     this.setState({
-      inputB: event.target.value
+      textB: event.target.value
     });
   }
 
   compare(){
-    let strInput = jsdiff.createPatch('diff', this.state.inputA, this.state.inputB);
-    let outputHtml = diff2html.getPrettyHtml(strInput, {inputFormat: 'diff', matching: 'lines', outputFormat: 'line-by-line'});
+    let strInput = jsdiff.createPatch('diff', this.state.textA, this.state.textB);
+    let outputHtml = Diff2Html.getPrettyHtml(strInput, {inputFormat: 'diff', matching: 'lines', outputFormat: 'line-by-line'});
     this.setState({
       outputHtml: outputHtml
     });
@@ -77,28 +75,28 @@ class App extends Component {
 
                 <Grid xs={4} item>
                   <TextField
-                    id="inputA"
-                    label="Input A"
+                    id="textA"
+                    label="Input text"
                     multiline
                     rows={10}
                     fullWidth
                     margin="normal"
                     variant="outlined"
-                    onChange={this.inputAChanged.bind(this)}
-                    value={this.state.inputA}
+                    onChange={this.textAChanged.bind(this)}
+                    value={this.state.textA}
                   />
                 </Grid>
                 <Grid xs={4} item>
                   <TextField
-                    id="inputB"
-                    label="Input B"
+                    id="textB"
+                    label="Input text"
                     multiline
                     rows={10}
                     fullWidth
                     margin="normal"
                     variant="outlined"
-                    onChange={this.inputBChanged.bind(this)}
-                    value={this.state.inputB}
+                    onChange={this.textBChanged.bind(this)}
+                    value={this.state.textB}
                   />
                 </Grid>
                 
