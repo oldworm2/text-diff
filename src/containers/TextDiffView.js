@@ -32,12 +32,12 @@ class TextDiffView extends Component {
     let files = event.dataTransfer.files;
 
     let file = files[0];
-    let self = this;
+    
     if (file) {
       var reader = new FileReader();
       reader.readAsText(file, "UTF-8");
-      reader.onload = function (evt) {
-        self.setState({
+      reader.onload = evt => {
+        this.setState({
           textA: evt.target.result
         });
       }
@@ -49,12 +49,12 @@ class TextDiffView extends Component {
     let files = event.dataTransfer.files;
 
     let file = files[0];
-    let self = this;
+
     if (file) {
       var reader = new FileReader();
       reader.readAsText(file, "UTF-8");
-      reader.onload = function (evt) {
-        self.setState({
+      reader.onload = evt => {
+        this.setState({
           textB: evt.target.result
         });
       } 
